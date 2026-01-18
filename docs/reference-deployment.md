@@ -88,9 +88,9 @@ This reference deployment uses a **containerized logging stack**, composed of:
 
 Example container images used in the reference deployment:
 
-- `grafana/grafana`
-- `grafana/loki`
-- `grafana/promtail`
+- `grafana`
+- `loki`
+- `promtail`
 
 This stack answers:  
 **“What exactly happened on this system or network device?”**
