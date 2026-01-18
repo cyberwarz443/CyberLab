@@ -163,4 +163,5 @@ Remote access is required to reach management and trusted resources without expo
 - Avoid overloading a single tool to perform multiple roles
 
 For a guided walkthrough of the documentation, see:
-- [Documentation guide](docs/README.md)
+Back to documentation guide: [docs/README.md](README.md)
+
