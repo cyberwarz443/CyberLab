@@ -215,18 +215,17 @@ Admin interfaces must never be exposed publicly.
 ---
 
 ## High-level architecture
-```mermaid
 flowchart TB
   Internet[(Internet)]
   FW[Firewall / Edge\nUDM Pro or pfSense]
 
   subgraph LAN[Internal Network]
-    Trusted[Trusted VLAN\n(Users & Servers)]
+    Trusted[Trusted VLAN\nUsers and Servers]
     IoT[IoT VLAN]
     Guest[Guest VLAN]
 
     Zabbix[Zabbix\nMonitoring]
-    Logging[Central Logging\n(Syslog + Loki + Grafana)]
+    Logging[Central Logging\nSyslog + Loki + Grafana]
     Wazuh[Wazuh\nSIEM]
   end
 
@@ -244,6 +243,7 @@ flowchart TB
   FW --> Logging
 
   Remote -->|VPN or Zero Trust| FW
+
 ```
 
 This high-level diagram shows the separation of concerns:
