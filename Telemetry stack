@@ -1,0 +1,42 @@
+## Telemetry stack overview
+
+This environment intentionally separates monitoring, logging, and SIEM functions.
+
+While there is overlap in data sources, each layer has a distinct purpose.
+
+### Monitoring (Zabbix)
+- Focus: availability, performance, and health
+- Answers: *Is it up? Is it healthy? Is it degrading?*
+- Strengths:
+  - fast alerting
+  - low false positives for operational issues
+  - strong historical metrics
+- Not intended for:
+  - security detection
+  - compliance validation
+  - forensic correlation
+
+### Centralized logging (Syslog + Grafana + Loki)
+- Focus: raw event collection and search
+- Answers: *What exactly happened on this system?*
+- Strengths:
+  - flexible ingestion
+  - fast searching
+  - long-term retention
+- Used for:
+  - root cause analysis
+  - evidence during incidents
+  - validation of patching and changes
+
+### SIEM (Wazuh)
+- Focus: security posture, vulnerability management, and compliance
+- Answers:
+  - *Is this behavior risky or suspicious?*
+  - *Is this system vulnerable or misconfigured?*
+  - *Are we drifting from baseline?*
+- Capabilities:
+  - host-based intrusion detection
+  - vulnerability detection
+  - file integrity monitoring
+  - policy and configuration compliance
+  - security-focused alerting and correlation
