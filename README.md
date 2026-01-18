@@ -214,6 +214,37 @@ Admin interfaces must never be exposed publicly.
 
 ---
 
+flowchart TB
+  Internet[(Internet)]
+  FW[Firewall / Edge\nUDM Pro or pfSense]
+
+  subgraph LAN[Internal Network]
+    Trusted[Trusted VLAN\n(Users & Servers)]
+    IoT[IoT VLAN]
+    Guest[Guest VLAN]
+
+    Zabbix[Zabbix\nMonitoring]
+    Logging[Central Logging\n(Syslog + Loki + Grafana)]
+    Wazuh[Wazuh\nSIEM]
+  end
+
+  Remote[Remote User]
+
+  Internet --> FW
+  FW --> Trusted
+  FW --> IoT
+  FW --> Guest
+
+  Trusted --> Zabbix
+  Trusted --> Logging
+  Trusted --> Wazuh
+
+  FW --> Logging
+
+  Remote -->|VPN / Zero Trust| FW
+
+---
+
 ## Disclaimer
 
 This project is for defensive security and operational reliability.  
