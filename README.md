@@ -215,6 +215,7 @@ Admin interfaces must never be exposed publicly.
 ---
 
 ## High-level architecture
+```mermaid
 flowchart TB
   Internet[(Internet)]
   FW[Firewall / Edge\nUDM Pro or pfSense]
@@ -243,9 +244,7 @@ flowchart TB
   FW --> Logging
 
   Remote -->|VPN or Zero Trust| FW
-
 ```
-
 This high-level diagram shows the separation of concerns:
 - **Zabbix** provides operational monitoring and health checks
 - **Central logging** (Syslog + Loki + Grafana) provides raw event evidence
