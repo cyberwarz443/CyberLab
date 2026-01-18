@@ -214,6 +214,7 @@ Admin interfaces must never be exposed publicly.
 
 ---
 
+## High-level architecture
 flowchart TB
   Internet[(Internet)]
   FW[Firewall / Edge\nUDM Pro or pfSense]
@@ -241,7 +242,15 @@ flowchart TB
 
   FW --> Logging
 
-  Remote -->|VPN / Zero Trust| FW
+  Remote -->|VPN or Zero Trust| FW
+
+This high-level diagram shows the separation of concerns:
+- **Zabbix** provides operational monitoring and health checks
+- **Central logging** (Syslog + Loki + Grafana) provides raw event evidence
+- **Wazuh** provides SIEM capabilities such as vulnerability detection, compliance, and security correlation
+
+These services may reside on the Trusted VLAN in minimal deployments, or on a dedicated Security/Management VLAN in more advanced setups.
+
 
 ---
 
