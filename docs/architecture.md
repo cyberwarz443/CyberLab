@@ -1,110 +1,46 @@
-flowchart TB
-  %% =========================
-  %% External
-  %% =========================
-  RU[Remote User]:::ext
-  Internet[(Internet)]:::ext
+# Architecture overview
 
-  %% =========================
-  %% Edge
-  %% =========================
-  FW[Firewall / Edge Router\nUDM Pro (ref) / pfSense (alt)]:::edge
+This document provides an overview of the system architecture and how the major components interact.
 
-  Internet --> FW
+The architecture is intentionally documented in layers to keep each concern clear and maintainable.
 
-  %% Note about UDM management limitations
-  DEFVLAN[[Default / "Mgmt" VLAN\n(UniFi gear mgmt lives here;\navoid placing other services on this VLAN)]]:::vlan
+---
 
-  %% =========================
-  %% VLANs (baseline)
-  %% =========================
-  subgraph VLANS[LAN Segmentation (Deny-by-Default Between VLANs)]
-    direction TB
+## Network trust boundaries
 
-    subgraph GUEST[Guest VLAN]
-      direction TB
-      GuestClients[Guest Clients]:::client
-    end
+The environment is segmented into multiple VLANs with deny-by-default rules enforced at the firewall.
 
-    subgraph IOT[IoT VLAN]
-      direction TB
-      IoTDevices[IoT Devices]:::client
-    end
+- Trusted VLAN
+- IoT VLAN
+- Guest VLAN
+- Optional Security/Management VLAN
 
-    subgraph TRUSTED[Trusted VLAN]
-      direction TB
-      Workstations[Trusted Endpoints\n(Users / Servers)]:::client
+For details, see:
+- [Network trust boundaries](network-trust-boundaries.md)
 
-      %% Core services can live here in minimal deployments
-      ZBX[Zabbix\n(Monitoring)]:::svc
-      WAZ[Wazuh\n(SIEM: vuln + compliance + HIDS/FIM)]:::svc
-      SYSLOG[Syslog Receiver]:::svc
-      LOKI[Loki\n(Log Storage)]:::svc
-      GRAF[Grafana\n(Dashboards)]:::svc
-      PROM[Prometheus\n(Metrics TSDB)]:::svc
-    end
+---
 
-    %% Optional VLAN: Security/Management
-    subgraph SECMGMT[Optional: Security / Management VLAN]
-      direction TB
-      SecNote[[If you create this VLAN,\nplace security tooling here instead of Trusted]]:::note
-    end
-  end
+## Telemetry and security data flows
 
-  %% Firewall defines VLANs (logical)
-  FW --- DEFVLAN
-  FW --- TRUSTED
-  FW --- IOT
-  FW --- GUEST
-  FW --- SECMGMT
+Monitoring, logging, and SIEM functions are intentionally separated.
 
-  %% =========================
-  %% Telemetry flows
-  %% =========================
+- Monitoring focuses on availability and performance
+- Logging provides raw event evidence
+- SIEM provides security posture, vulnerability detection, and compliance
 
-  %% Monitoring (metrics)
-  Workstations -->|metrics / health| ZBX
-  IoTDevices -->|availability checks\n(optional)| ZBX
-  GuestClients -->|availability checks\n(optional)| ZBX
+For details, see:
+- [Telemetry and security data flows](telemetry-security-data-flows.md)
 
-  %% Prometheus metrics (optional in diagram, but included per your note)
-  Workstations -->|metrics| PROM
-  PROM -->|dashboards| GRAF
+---
 
-  %% Central logging
-  FW -->|firewall logs| SYSLOG
-  Workstations -->|syslog / app logs| SYSLOG
-  IoTDevices -->|syslog (if supported)| SYSLOG
+## Reference deployment
 
-  SYSLOG -->|log pipeline| LOKI
-  LOKI -->|search & dashboards| GRAF
+A working reference build is documented to ground the architecture in reality.
 
-  %% SIEM (security telemetry)
-  Workstations -->|agent telemetry\n(vuln, compliance,\nFIM, security events)| WAZ
-  WAZ -->|alerts| NOTIFY[Notifications\nEmail / Chat / etc.]:::notify
-  ZBX -->|alerts| NOTIFY
+- Hardware
+- Hypervisor
+- VLAN layout
+- Tooling choices
 
-  %% =========================
-  %% Remote Access (two patterns)
-  %% =========================
-
-  %% WireGuard pattern
-  RU -->|VPN to public endpoint| FW
-  FW -->|port allowed\n("hole" for VPN)| WG[WireGuard\n(VM or Container)]:::svc
-  WG -->|access to internal resources| Workstations
-
-  %% Twingate pattern (optional)
-  RU -.->|Zero Trust| ZTB[ZT Broker\n(Twingate cloud)]:::ext
-  ZTB -.-> ZTC[ZT Connector / Appliance\n(inside LAN)]:::svc
-  ZTC -.->|resource access| Workstations
-
-  %% =========================
-  %% Styling
-  %% =========================
-  classDef ext fill:#f7f7f7,stroke:#555,stroke-width:1px
-  classDef edge fill:#fff3cd,stroke:#856404,stroke-width:1px
-  classDef vlan fill:#e8f4ff,stroke:#1f5f9f,stroke-width:1px
-  classDef client fill:#ffffff,stroke:#666,stroke-width:1px
-  classDef svc fill:#eaffea,stroke:#2f7d32,stroke-width:1px
-  classDef notify fill:#ffe8f1,stroke:#a61b5b,stroke-width:1px
-  classDef note fill:#f0f0f0,stroke:#888,stroke-dasharray: 4 4
+See:
+- [Reference deployment](reference-deployment.md)

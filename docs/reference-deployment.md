@@ -1,12 +1,33 @@
-## Reference deployment (summary)
+# Reference deployment
 
-This repository reflects a working reference build:
+This document describes the reference environment used for this project.
 
-- Hypervisor: Proxmox
-- Firewall: UDM Pro (pfSense also applicable)
-- VLANs: Trusted, IoT, Guest
-- Monitoring: Zabbix
-- SIEM: Wazuh
-- Central logging: Syslog + Loki + Grafana
-- Remote access: WireGuard (VPN) or Twingate (Zero Trust)
-- Hardware: 32GB RAM, Intel i7-class CPU
+## Hardware
+- CPU
+- RAM
+- Storage
+- NICs (if relevant)
+
+## Virtualization
+- Hypervisor
+- VM vs container philosophy
+
+## Network
+- VLANs
+- Firewall role
+- DNS placement
+
+## Telemetry stack
+### Monitoring (Zabbix)
+### Central logging (Syslog + Loki + Grafana)
+### SIEM (Wazuh)
+
+## Remote access
+- VPN option
+- Zero Trust option
+- Tradeoffs
+
+## Lessons learned
+- What worked
+- What didn’t
+- What you’d change next time
