@@ -162,7 +162,7 @@ Remote access is required to reach management and trusted resources without expo
 - VLAN segmentation significantly improves signal quality in logs and alerts
 - Avoid overloading a single tool to perform multiple roles
 
-For a guided walkthrough of the documentation, see:
-Back to documentation guide: [Documentation guide](./README.md)
+For a guided walkthrough of the documentation, see: [Back to documentation guide](README.md)
+
 
 
