@@ -252,10 +252,16 @@ This high-level diagram shows the separation of concerns:
 
 These services may reside on the Trusted VLAN in minimal deployments, or on a dedicated Security/Management VLAN in more advanced setups.
 
-
 ---
 
 ## Disclaimer
 
 This project is for defensive security and operational reliability.  
 You are responsible for proper deployment and compliance.
+
+## Reference deployment
+
+A working reference build (hardware, hypervisor, VLANs, and tooling) is documented here:
+
+- [Reference deployment](docs/reference-deployment.md)
+
