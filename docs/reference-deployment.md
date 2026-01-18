@@ -161,3 +161,6 @@ Remote access is required to reach management and trusted resources without expo
 - Containerizing the logging stack simplifies upgrades and maintenance
 - VLAN segmentation significantly improves signal quality in logs and alerts
 - Avoid overloading a single tool to perform multiple roles
+
+For a guided walkthrough of the documentation, see:
+- [Documentation guide](docs/README.md)
