@@ -262,7 +262,21 @@ You are responsible for proper deployment and compliance.
 
 ## Reference deployment
 
-A working reference build (hardware, hypervisor, VLANs, and tooling) is documented here:
+This repository is grounded in a working reference build.  
+The following documents describe the environment at different levels of detail:
 
-- [Reference deployment](docs/reference-deployment.md)
+- **[Reference deployment](docs/reference-deployment.md)**  
+  Hardware, hypervisor, network layout, telemetry stack, patching, and remote access used in the reference environment.
+
+- **[Architecture overview](docs/architecture.md)**  
+  How the major components fit together and how the documentation is structured.
+
+- **[Network trust boundaries](docs/network-trust-boundaries.md)**  
+  VLAN segmentation, firewall philosophy, and trust boundary enforcement.
+
+- **[Telemetry and security data flows](docs/telemetry-security-data-flows.md)**  
+  How monitoring, centralized logging, and SIEM data flows through the environment.
+
+- **[SOC-of-one workflow](docs/soc-workflow.md)**  
+  How alerts are triaged, investigated, and remediated in daily operations.
 
