@@ -35,6 +35,7 @@ The objective is not enterprise perfection — it is **visibility, correlation, 
    - Systems update automatically
    - Confirmation is generated and retained
    - Evidence exists locally and centrally for audit or compliance needs
+   - Patching in the reference deployment is automated using Ansible to ensure consistency, repeatability, and auditability.
 
 5. **Secure remote access**
    - No exposed administrative ports

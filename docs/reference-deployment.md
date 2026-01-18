@@ -46,6 +46,23 @@ This hardware profile is sufficient to run monitoring, centralized logging, and 
 
 The telemetry stack is intentionally split into **three distinct layers**: monitoring, centralized logging, and SIEM.  
 Although all three may process “logs” in some form, their purposes are different.
+---
+
+## Configuration management and patching
+
+**Tool:** Ansible
+
+Ansible is used for:
+- operating system patching
+- baseline configuration enforcement
+- repeatable system changes across the environment
+
+Patching is automated via Ansible playbooks and scheduled execution, rather than ad-hoc package updates.
+
+Evidence of patching includes:
+- local logs on the target systems
+- centralized logs in the logging stack
+- notifications indicating successful or failed runs
 
 ---
 
