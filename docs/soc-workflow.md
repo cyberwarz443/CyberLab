@@ -8,6 +8,8 @@ This workflow reflects a **SOC-of-one** reality:
 - contextual decision-making
 - prioritization over theoretical completeness
 
+> Note: While this project focuses on defensive security, the workflows described here are equally useful for understanding offensive techniques by observing their effects in logs, metrics, and alerts.
+
 ---
 
 ## Alert sources and intent

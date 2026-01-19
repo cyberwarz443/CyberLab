@@ -13,6 +13,25 @@ The objective is not enterprise perfection — it is **visibility, correlation, 
 
 ---
 
+## What this project teaches
+
+This repository is designed to be more than a set of tools.
+
+By building and operating this stack, you will learn:
+
+- How modern defensive security tooling fits together
+- Why monitoring, logging, and SIEM are separate concerns
+- How attackers generate signals — and how those signals are detected
+- How vulnerability management and patching reduce real-world risk
+- How to think like a SOC analyst in a small environment
+
+The same environment can be used to:
+- practice defensive security
+- understand offensive techniques through their observable effects
+- learn tool capabilities and limitations
+
+---
+
 ## Primary security outcomes
 
 1. **Detect, correlate, and investigate security events (SIEM)**
