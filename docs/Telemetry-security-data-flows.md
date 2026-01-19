@@ -31,3 +31,5 @@ flowchart LR
   %% Alert flows
   Zabbix -->|alerts| Notify
   Wazuh -->|security alerts| Notify
+  
+  .
