@@ -63,6 +63,27 @@ The same environment can be used to:
 
 ---
 
+## Defensive security foundations
+
+While this project emphasizes visibility and detection, it is built on a strong defensive baseline.
+
+Core defensive principles include:
+
+- **Deny-by-default network segmentation** enforced at the firewall
+- **Explicit inter-VLAN rules** that limit lateral movement
+- **Minimized exposed services**, especially on internet-facing systems
+- **Secure remote access** via VPN or Zero Trust
+- **Routine patching** to reduce attack surface over time
+
+These controls are designed to:
+- reduce the likelihood of compromise
+- limit blast radius when failures occur
+- improve the signal-to-noise ratio of monitoring and security tools
+
+Detection and response are most effective when strong preventive controls are already in place.
+
+---
+
 ## Target audience
 
 - Home users who care about security
